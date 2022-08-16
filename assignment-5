@@ -18,7 +18,7 @@ pipeline{
                 }
             }catch(Exception e){
                 echo 'Stage A Failed'
-                isA=false
+                stageA=false
             }
             }
         }
@@ -27,7 +27,7 @@ pipeline{
         stage('B'){
             when {
                 expression {
-                    isA == true
+                    stageA == true
                 }
             }
             steps{
@@ -38,7 +38,7 @@ pipeline{
         stage('C'){
             when {
                 expression {
-                    isA == false
+                    stageA == false
                 }
             }
             steps{
