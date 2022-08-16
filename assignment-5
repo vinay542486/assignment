@@ -1,23 +1,24 @@
-boolean stageA=true
+boolean isA=true
 pipeline{
     agent any
     parameters {
-        choice(name: 'stageA' choices: ['success', 'fail'], description: 'set A stage status')
+        choice choices: ['success', 'fail'], description: 'set \'A\' stage status', name: 'Is_A'
     }
+
     stages{
         stage('A'){
             steps{
             script{
                 try{
                 echo 'Stage A is Running'
-                if(stageA == 'fail'){
+                if(Is_A == 'fail'){
                     sh 'exit 1'
                 }else{
                     sh 'exit 0'
                 }
             }catch(Exception e){
                 echo 'Stage A Failed'
-                stageA=false
+                isA=false
             }
             }
         }
@@ -26,7 +27,7 @@ pipeline{
         stage('B'){
             when {
                 expression {
-                    stageA == true
+                    isA == true
                 }
             }
             steps{
@@ -37,7 +38,7 @@ pipeline{
         stage('C'){
             when {
                 expression {
-                    stageA == false
+                    isA == false
                 }
             }
             steps{
