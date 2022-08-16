@@ -1,4 +1,4 @@
-boolean isA=true
+boolean stageA=true
 pipeline{
     agent any
     parameters {
