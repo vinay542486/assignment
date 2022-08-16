@@ -1,0 +1,32 @@
+pipeline {
+  agent any
+  parameters {
+    choice(name: 'stage_to_be_run', choices: ['BUILD','DEPLOY','TEST'], description: 'stages to build')
+  }
+   stages {
+    stage ('BUILD') {
+    when {
+         expression { params.stage_to_be_run == 'BUILD' }
+     }
+      steps {
+         echo 'this is build stage'
+            }
+          }  
+    stage ('DEPLOY') {
+      when {
+         expression { params.stage_to_be_run == 'DEPLOY' }
+      }
+            steps {
+              echo 'this is deploy stage'
+                }
+              } 
+       stage ('TEST') {
+        when {
+         expression { params.stage_to_be_run == 'TEST' }
+        }
+            steps {
+                  echo 'this is test'
+                }
+              }
+      } 
+    }
