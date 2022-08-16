@@ -1,4 +1,4 @@
-boolean stageA=false
+boolean build=false
 pipeline{
     agent any
 
@@ -11,7 +11,7 @@ pipeline{
                     //sh 'exit 1'
             }catch(Exception e){
                 echo 'Stage A is Failed'
-                stageA=false
+                build=false
             }
             }
         }
@@ -20,7 +20,7 @@ pipeline{
         stage('B'){
             when {
                 expression {
-                    stageA == true
+                    build == true
                 }
             }
             steps{
@@ -31,7 +31,7 @@ pipeline{
         stage('C'){
             when {
                 expression {
-                    stageA == false
+                    build == false
                 }
             }
             steps{
