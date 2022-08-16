@@ -1,0 +1,42 @@
+boolean stage-A=true
+pipeline{
+    agent any
+
+    stages{
+        stage('A'){
+            steps{
+            script{
+                try{
+                echo 'Stage A is Running'
+                    //sh 'exit 1'
+            }catch(Exception e){
+                echo 'Stage A is Failed'
+                stage-A=false
+            }
+            }
+        }
+        }
+
+        stage('B'){
+            when {
+                expression {
+                    stage-A == true
+                }
+            }
+            steps{
+                echo 'Stage B is executed'
+            }
+        }
+
+        stage('C'){
+            when {
+                expression {
+                    stage-A == false
+                }
+            }
+            steps{
+                echo 'Stage C is ececuted'
+            }
+        }
+    }
+}
