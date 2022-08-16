@@ -1,4 +1,4 @@
-boolean build=false
+boolean build=true
 pipeline{
     agent any
 
