@@ -8,7 +8,7 @@ pipeline{
             script{
                 try{
                 echo 'Stage A is Running succesfully'
-                    //sh 'exit 1'
+                    //sh 'exit 0'
             }catch(Exception e){
                 echo 'Stage A is Failed'
                 build=false
